@@ -1,0 +1,6 @@
+@Cactus.WebAPI_HostAddress = http://localhost:5189
+
+GET {{Cactus.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
