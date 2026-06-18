@@ -39,7 +39,6 @@ namespace Cactus.WebAPI.Services
         public async Task CreateAsync(CreateEventDto dto)
         {
             var @event= dto.Adapt<Entities.Event>();
-            @event.Id = Guid.NewGuid().ToString();
             await _dbContext.Events.AddAsync(@event);
             await _dbContext.SaveChangesAsync();
         }

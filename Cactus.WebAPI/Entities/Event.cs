@@ -1,8 +1,7 @@
 ﻿namespace Cactus.WebAPI.Entities
 {
-    public class Event
+    public class Event: BaseEntity
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
         public DateTime? StartDate { get; set; }
