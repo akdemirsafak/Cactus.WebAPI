@@ -4,6 +4,7 @@ using Cactus.WebAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cactus.WebAPI.Migrations
 {
     [DbContext(typeof(CactusDbContext))]
-    partial class CactusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260623211128_NullableRefreshTokenProperties")]
+    partial class NullableRefreshTokenProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,9 +148,6 @@ namespace Cactus.WebAPI.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsRevoked")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("RememberMe")
                         .HasColumnType("bit");
 
                     b.Property<string>("ReplacedByToken")
