@@ -1,15 +1,33 @@
 ﻿using Cactus.WebAPI.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Cactus.WebAPI.DbContexts
 {
-    public class CactusDbContext : DbContext
+    public class CactusDbContext : IdentityDbContext<AppUser,IdentityRole,string>
     {
         public CactusDbContext(DbContextOptions<CactusDbContext> options) : base(options)
         {
             
         }
         public DbSet<Entities.Event> Events { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<RefreshToken>(
+                entity =>
+                {
+                    entity.Property(x => x.Token)
+                        .IsRequired()
+                        .HasMaxLength(500);
+                    entity.HasIndex(x => x.Token)
+                        .IsUnique();
+                });
+            base.OnModelCreating(builder);
+        }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
